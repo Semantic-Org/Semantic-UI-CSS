@@ -5,7 +5,7 @@ var
 Package.describe({
   name    : 'semantic:ui-css',
   summary : 'Semantic UI - CSS Release of Semantic UI',
-  version : '1.10.3',
+  version : '1.10.4',
   git     : 'git://github.com/Semantic-Org/Semantic-UI-CSS.git',
 });
 
@@ -20,7 +20,6 @@ Package.onUse(function(api) {
     'themes/default/assets/fonts/icons.svg',
     'themes/default/assets/fonts/icons.ttf',
     'themes/default/assets/fonts/icons.woff',
-    'themes/default/assets/fonts/icons.woff2',
     'themes/default/assets/fonts/icons.woff2',
 
     // flags
