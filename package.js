@@ -16,7 +16,6 @@ Package.onUse(function(api) {
   api.addFiles([
     // icons
     'themes/default/assets/fonts/icons.eot',
-    'themes/default/assets/fonts/icons.otf',
     'themes/default/assets/fonts/icons.svg',
     'themes/default/assets/fonts/icons.ttf',
     'themes/default/assets/fonts/icons.woff',
