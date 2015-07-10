@@ -1,5 +1,5 @@
  /*
- * # Semantic UI - 2.0.2
+ * # Semantic UI - 2.0.3
  * https://github.com/Semantic-Org/Semantic-UI
  * http://www.semantic-ui.com/
  *
@@ -9,7 +9,7 @@
  *
  */
 /*!
- * # Semantic UI 2.0.2 - Site
+ * # Semantic UI 2.0.3 - Site
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -496,7 +496,7 @@ $.extend($.expr[ ":" ], {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.2 - Form Validation
+ * # Semantic UI 2.0.3 - Form Validation
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -1486,7 +1486,7 @@ $.fn.form.settings = {
     email   : "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
     integer : /^\-?\d+$/,
     flags   : /^\/(.*)\/(.*)?/,
-    url     : /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i
+    url     : /(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/i
   },
 
   selector : {
@@ -1744,7 +1744,7 @@ $.fn.form.settings = {
 
     // value is most likely url
     url: function(value) {
-      return $.fn.form.settings.regExp.url.match(value);
+      return $.fn.form.settings.regExp.url.test(value);
     }
   }
 
@@ -1753,7 +1753,7 @@ $.fn.form.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Accordion
+ * # Semantic UI 2.0.3 - Accordion
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -2346,7 +2346,7 @@ $.extend( $.easing, {
 
 
 /*!
- * # Semantic UI 2.0.2 - Checkbox
+ * # Semantic UI 2.0.3 - Checkbox
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -2524,6 +2524,7 @@ $.fn.checkbox = function(parameters) {
               return;
             }
             module.toggle();
+            event.preventDefault();
           },
           keydown: function(event) {
             var
@@ -3062,7 +3063,7 @@ $.fn.checkbox.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Dimmer
+ * # Semantic UI 2.0.3 - Dimmer
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -3755,7 +3756,7 @@ $.fn.dimmer.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.2 - Dropdown
+ * # Semantic UI 2.0.3 - Dropdown
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -5846,6 +5847,12 @@ $.fn.dropdown = function(parameters) {
                   return;
                 }
               }
+
+              if( $input.is('select') && (settings.allowAdditions || settings.apiSettings) ) {
+                module.debug('Adding an option to the select before setting the value', value);
+                module.add.optionValue(value);
+              }
+
               module.debug('Updating input value', value, currentValue);
               $input
                 .val(value)
@@ -6107,10 +6114,10 @@ $.fn.dropdown = function(parameters) {
               newValue = [addedValue];
             }
             // add values
-            if( $input.is('select')) {
-              if(settings.allowAdditions) {
-                module.add.optionValue(addedValue);
+            if($input.is('select')) {
+              if(settings.allowAdditions || settings.apiSettings) {
                 module.debug('Adding value to select', addedValue, newValue, $input);
+                module.add.optionValue(addedValue);
               }
             }
             else {
@@ -7020,7 +7027,7 @@ $.fn.dropdown.settings.templates = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Video
+ * # Semantic UI 2.0.3 - Video
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -7683,7 +7690,7 @@ $.fn.embed.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Modal
+ * # Semantic UI 2.0.3 - Modal
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -8092,10 +8099,8 @@ $.fn.modal = function(parameters) {
         hideDimmer: function() {
           if( $dimmable.dimmer('is animating') || ($dimmable.dimmer('is active')) ) {
             $dimmable.dimmer('hide', function() {
-              if(settings.transition && $.fn.transition !== undefined && $module.transition('is supported')) {
-                module.remove.clickaway();
-                module.remove.screenHeight();
-              }
+              module.remove.clickaway();
+              module.remove.screenHeight();
             });
           }
           else {
@@ -8181,13 +8186,17 @@ $.fn.modal = function(parameters) {
               ;
             }
           },
-          screenHeight: function() {
-            if(module.cache.height > module.cache.pageHeight) {
-              module.debug('Removing page height');
-              $body
-                .css('height', '')
-              ;
+          bodyStyle: function() {
+            if($body.attr('style') === '') {
+              module.verbose('Removing style attribute');
+              $body.removeAttr('style');
             }
+          },
+          screenHeight: function() {
+            module.debug('Removing page height');
+            $body
+              .css('height', '')
+            ;
           },
           keyboardShortcuts: function() {
             module.verbose('Removing keyboard shortcuts');
@@ -8571,7 +8580,7 @@ $.fn.modal.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Nag
+ * # Semantic UI 2.0.3 - Nag
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -9048,7 +9057,7 @@ $.fn.nag.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Popup
+ * # Semantic UI 2.0.3 - Popup
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -10268,7 +10277,7 @@ $.fn.popup.settings = {
   inline         : false,
 
   // popup should be removed from page on hide
-  preserve       : true,
+  preserve       : false,
 
   // popup should not close when being hovered on
   hoverable      : false,
@@ -10402,7 +10411,7 @@ $.fn.popup.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Progress
+ * # Semantic UI 2.0.3 - Progress
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -11196,7 +11205,7 @@ $.fn.progress.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.2 - Rating
+ * # Semantic UI 2.0.3 - Rating
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -11672,7 +11681,7 @@ $.fn.rating.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Search
+ * # Semantic UI 2.0.3 - Search
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -12951,7 +12960,7 @@ $.fn.search.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Shape
+ * # Semantic UI 2.0.3 - Shape
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -13827,7 +13836,7 @@ $.fn.shape.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.2 - Sidebar
+ * # Semantic UI 2.0.3 - Sidebar
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -14851,7 +14860,7 @@ $.fn.sidebar.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Sticky
+ * # Semantic UI 2.0.3 - Sticky
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -15733,7 +15742,7 @@ $.fn.sticky.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.2 - Tab
+ * # Semantic UI 2.0.3 - Tab
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -16630,7 +16639,7 @@ $.fn.tab.settings = {
 
 })( jQuery, window , document );
 /*!
- * # Semantic UI 2.0.2 - Transition
+ * # Semantic UI 2.0.3 - Transition
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -17184,7 +17193,10 @@ $.fn.transition = function() {
             ;
           },
           currentAnimation: function() {
-            return module.cache.animation || false;
+            return (module.cache && module.cache.animation !== undefined)
+              ? module.cache.animation
+              : false
+            ;
           },
           currentDirection: function() {
             return module.is.inward()
@@ -17700,7 +17712,7 @@ $.fn.transition.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - API
+ * # Semantic UI 2.0.3 - API
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -18778,7 +18790,7 @@ $.api.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - State
+ * # Semantic UI 2.0.3 - State
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -19474,7 +19486,7 @@ $.fn.state.settings = {
 })( jQuery, window , document );
 
 /*!
- * # Semantic UI 2.0.2 - Visibility
+ * # Semantic UI 2.0.3 - Visibility
  * http://github.com/semantic-org/semantic-ui/
  *
  *
