@@ -1,6 +1,6 @@
 # CSS  Distribution
 
-This repository is automatically synced with the main [Semantic UI](https://github.com/Semantic-Org/Semantic-UI) repository to provide lightweight LESS only version of Semantic UI.
+This repository is automatically synced with the main [Semantic UI](https://github.com/Semantic-Org/Semantic-UI) repository to provide lightweight CSS only version of Semantic UI.
 
 This package **does not support theming** and includes generated CSS files of the default theme only.
 
