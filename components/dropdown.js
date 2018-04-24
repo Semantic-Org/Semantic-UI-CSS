@@ -2424,7 +2424,7 @@ $.fn.dropdown = function(parameters) {
             }
           },
           upward: function($currentMenu) {
-            var $element = $currentMenu || $module;
+            var $element = $currentMenu || $menu;
             $element.addClass(className.upward);
           },
           leftward: function($currentMenu) {
