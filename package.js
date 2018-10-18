@@ -15,7 +15,7 @@ Package.onUse(function(api) {
 
   api.use('jquery', 'client');
 
-  api.addFiles([
+  api.addAssets([
     // icons
     'themes/default/assets/fonts/icons.eot',
     'themes/default/assets/fonts/icons.svg',
@@ -25,7 +25,9 @@ Package.onUse(function(api) {
 
     // flags
     'themes/default/assets/images/flags.png',
+  ], 'client');
 
+  api.addFiles([
     // release
     'semantic.css',
     'semantic.js'
