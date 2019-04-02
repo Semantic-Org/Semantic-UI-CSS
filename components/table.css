@@ -504,21 +504,25 @@
 .ui.table tbody tr td.selectable:hover {
   background: rgba(0, 0, 0, 0.05) !important;
   color: rgba(0, 0, 0, 0.95) !important;
+  cursor: pointer;
 }
 .ui.selectable.inverted.table tbody tr:hover,
 .ui.inverted.table tbody tr td.selectable:hover {
   background: rgba(255, 255, 255, 0.08) !important;
   color: #ffffff !important;
+  cursor: pointer;
 }
 
 /* Selectable Cell Link */
 .ui.table tbody tr td.selectable {
   padding: 0em;
+  cursor: pointer;
 }
 .ui.table tbody tr td.selectable > a:not(.ui) {
   display: block;
   color: inherit;
   padding: 0.78571429em 0.78571429em;
+  cursor: pointer;
 }
 
 /* Other States */
