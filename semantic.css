@@ -19336,7 +19336,7 @@ ol.ui.horizontal.list li:before,
   -ms-flex-align: stretch;
   align-items: stretch;
   margin: 1em 0em;
-  background: '';
+  background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   line-height: 1.14285714em;
@@ -23826,7 +23826,7 @@ ol.ui.horizontal.list li:before,
 .ui.menu .header.item,
 .ui.vertical.menu .header.item {
   margin: 0em;
-  background: '';
+  background: transparent;
   text-transform: normal;
   font-weight: bold;
 }
