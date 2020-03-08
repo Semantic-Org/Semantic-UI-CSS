@@ -409,6 +409,7 @@ i.small.icons {
 }
 i.icon,
 i.icons {
+  line-height: 1;
   font-size: 1em;
 }
 i.large.icon,
