@@ -305,6 +305,7 @@ ol.ui.list ol li,
 .ui.horizontal.list > .item > .icon + .content {
   float: none;
   display: inline-block;
+  width: auto;
 }
 
 
@@ -946,4 +947,3 @@ ol.ui.horizontal.list li:before,
 /*******************************
     User Variable Overrides
 *******************************/
-
